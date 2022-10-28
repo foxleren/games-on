@@ -22,10 +22,13 @@ func (h *Handler) InitRoutes() *gin.Engine {
 		auth.POST("/sign-in", h.signIn)
 	}
 
-	games := router.Group("/games")
+	api := router.Group("/api", h.userIdentity)
 	{
-		games.GET("/", h.getAllGames)
-		games.GET("/:id", h.getGameByID)
+		games := api.Group("/games")
+		{
+			games.GET("/", h.getAllGames)
+			games.GET("/:id", h.getGameByID)
+		}
 	}
 
 	return router
