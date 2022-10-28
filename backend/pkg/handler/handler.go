@@ -1,14 +1,16 @@
 package handler
 
 import (
+	"github.com/foxleren/GamesOn/backend/pkg/service"
 	"github.com/gin-gonic/gin"
 )
 
 type Handler struct {
+	services *service.Service
 }
 
-func NewHandler() *Handler {
-	return &Handler{}
+func NewHandler(s *service.Service) *Handler {
+	return &Handler{services: s}
 }
 
 func (h *Handler) InitRoutes() *gin.Engine {
