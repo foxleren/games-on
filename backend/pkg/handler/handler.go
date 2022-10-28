@@ -26,6 +26,8 @@ func (h *Handler) InitRoutes() *gin.Engine {
 	{
 		games := api.Group("/games")
 		{
+			games.POST("/", h.createGame)
+			games.POST("/:id", h.buyGame)
 			games.GET("/", h.getAllGames)
 			games.GET("/:id", h.getGameByID)
 		}
