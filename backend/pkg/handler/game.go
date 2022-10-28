@@ -4,15 +4,10 @@ import (
 	"github.com/foxleren/GamesOn/backend/models"
 	"github.com/gin-gonic/gin"
 	"net/http"
+	"strconv"
 )
 
 func (h *Handler) createGame(c *gin.Context) {
-	//id, ok := c.Get(userCtx)
-	//if !ok {
-	//	newErrorResponse(c, http.StatusInternalServerError, "user not found")
-	//	return
-	//}
-
 	var input models.Game
 	if err := c.BindJSON(&input); err != nil {
 		newErrorResponse(c, http.StatusBadRequest, err.Error())
@@ -34,10 +29,29 @@ func (h *Handler) buyGame(c *gin.Context) {
 
 }
 
-func (h *Handler) getGameByID(c *gin.Context) {
+func (h *Handler) getAllGames(c *gin.Context) {
+	games, err := h.services.GetAllGames()
+	if err != nil {
+		newErrorResponse(c, http.StatusInternalServerError, err.Error())
+		return
+	}
 
+	c.JSON(http.StatusOK, map[string]interface{}{
+		"data": games,
+	})
 }
 
-func (h *Handler) getAllGames(c *gin.Context) {
+func (h *Handler) getGameByID(c *gin.Context) {
+	gameId, err := strconv.Atoi(c.Param("id"))
+	if err != nil {
+		newErrorResponse(c, http.StatusBadRequest, "invalid id param")
+		return
+	}
+	game, err := h.services.Game.GetGameById(gameId)
+	if err != nil {
+		newErrorResponse(c, http.StatusInternalServerError, err.Error())
+		return
+	}
 
+	c.JSON(http.StatusOK, game)
 }

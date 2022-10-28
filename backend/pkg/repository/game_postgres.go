@@ -25,16 +25,22 @@ func (r *GamePostgres) CreateGame(game models.Game) (int, error) {
 	return id, nil
 }
 
-//func (r *GamePostgres) addGameToUser(userId int, game models.Game) (int, error) {
-//	tx, err := r.db.Begin()
-//	if err != nil {
-//		return 0, err
-//	}
-//	var id int
-//	createGameQuery := fmt.Sprintf("INSERT INTO %s (title, description, price) VALUES ($1, $2, $3)", gamesTable)
-//	row := tx.QueryRow(createGameQuery, game.Title, game.Description, game.Price)
-//	if err := row.Scan(&id); err != nil {
-//		tx.Rollback()
-//		return 0, err
-//	}
-//}
+func (r *GamePostgres) BuyGame(userId int, game models.Game) (int, error) {
+	return 0, nil
+}
+
+func (r *GamePostgres) GetAllGames() ([]models.Game, error) {
+	var games []models.Game
+	query := fmt.Sprintf("SELECT * FROM %s", gamesTable)
+	err := r.db.Select(&games, query)
+
+	return games, err
+}
+
+func (r *GamePostgres) GetGameById(gameId int) (models.Game, error) {
+	var game models.Game
+	query := fmt.Sprintf("SELECT id, title, description, price FROM %s WHERE id = $1", gamesTable)
+	err := r.db.Get(&game, query, gameId)
+
+	return game, err
+}

@@ -12,6 +12,9 @@ type Authorization interface {
 
 type Game interface {
 	CreateGame(game models.Game) (int, error)
+	BuyGame(userId int, game models.Game) (int, error)
+	GetAllGames() ([]models.Game, error)
+	GetGameById(gameId int) (models.Game, error)
 }
 
 type Repository struct {
