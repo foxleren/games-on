@@ -22,3 +22,20 @@ func (h *Handler) createCart(c *gin.Context) {
 		"cart_id": cartId,
 	})
 }
+
+func (h *Handler) clearCart(c *gin.Context) {
+	id, err := getUserId(c)
+	if err != nil {
+		newErrorResponse(c, http.StatusInternalServerError, err.Error())
+		return
+	}
+
+	err = h.services.Cart.ClearCart(id)
+	if err != nil {
+		newErrorResponse(c, http.StatusInternalServerError, err.Error())
+		return
+	}
+	c.JSON(http.StatusOK, map[string]interface{}{
+		"total_price": 0,
+	})
+}

@@ -15,3 +15,6 @@ func NewCartService(repo repository.Cart) *CartService {
 func (s *CartService) CreateCart(userId int) (int, error) {
 	return s.repo.CreateCart(userId)
 }
+func (s *CartService) ClearCart(userId int) error {
+	return s.repo.ClearCart(userId)
+}

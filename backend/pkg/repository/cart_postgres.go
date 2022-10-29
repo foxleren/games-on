@@ -24,6 +24,13 @@ func (r *CartPostgres) CreateCart(userId int) (int, error) {
 	return id, nil
 }
 
+func (r *CartPostgres) ClearCart(userId int) error {
+	clearCartQuery := fmt.Sprintf("UPDATE %s SET total_price = 0 WHERE user_id = %d", cartsTable, userId)
+
+	_, err := r.db.Exec(clearCartQuery)
+	return err
+}
+
 //func (r *CartPostgres) CreateCart(userId int) (int, error) {
 //	tx, err := r.db.Begin()
 //	if err != nil {

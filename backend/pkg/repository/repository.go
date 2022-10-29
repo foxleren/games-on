@@ -23,6 +23,7 @@ type Game interface {
 
 type Cart interface {
 	CreateCart(userId int) (int, error)
+	ClearCart(userId int) error
 }
 
 type Repository struct {
