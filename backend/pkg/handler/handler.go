@@ -22,12 +22,31 @@ func (h *Handler) InitRoutes() *gin.Engine {
 		auth.POST("/sign-in", h.signIn)
 	}
 
-	api := router.Group("/api", h.userIdentity)
+	api := router.Group("/api")
 	{
+		authenticated := api.Group("/user", h.userIdentity)
+		{
+			authenticated.GET("/", h.getUserAccount)
+			games := authenticated.Group("/games")
+			{
+				games.POST("/", h.addGameToUser)
+				games.GET("/", h.getUserGames)
+			}
+			cart := authenticated.Group("/cart")
+			{
+				cart.POST("/", h.createCart)
+				//cart.DELETE("/", h.clearCart)
+			}
+			//cartItem := authenticated.Group("/cartItem")
+			//{
+			//	cartItem.POST("/", h.createCartItem)
+			//	cartItem.GET("/", h.getAllCartItems)
+			//	cartItem.DELETE("/:id", h.deleteCartItem)
+			//}
+		}
 		games := api.Group("/games")
 		{
 			games.POST("/", h.createGame)
-			games.POST("/:id", h.buyGame)
 			games.GET("/", h.getAllGames)
 			games.GET("/:id", h.getGameByID)
 		}

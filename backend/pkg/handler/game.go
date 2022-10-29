@@ -25,10 +25,6 @@ func (h *Handler) createGame(c *gin.Context) {
 	})
 }
 
-func (h *Handler) buyGame(c *gin.Context) {
-
-}
-
 func (h *Handler) getAllGames(c *gin.Context) {
 	games, err := h.services.GetAllGames()
 	if err != nil {

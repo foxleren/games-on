@@ -12,3 +12,10 @@ CREATE TABLE games
     description varchar(255) not null,
     price       float(2)     not null
 );
+
+CREATE TABLE carts
+(
+    id          serial   not null unique,
+    user_id     serial   not null unique,
+    total_price float(2) not null
+);

@@ -25,10 +25,6 @@ func (r *GamePostgres) CreateGame(game models.Game) (int, error) {
 	return id, nil
 }
 
-func (r *GamePostgres) BuyGame(userId int, game models.Game) (int, error) {
-	return 0, nil
-}
-
 func (r *GamePostgres) GetAllGames() ([]models.Game, error) {
 	var games []models.Game
 	query := fmt.Sprintf("SELECT * FROM %s", gamesTable)
