@@ -1,6 +1,7 @@
 package handler
 
 import (
+	"github.com/foxleren/GamesOn/backend/models"
 	"github.com/gin-gonic/gin"
 	"net/http"
 	"strconv"
@@ -24,20 +25,27 @@ func (h *Handler) createCart(c *gin.Context) {
 	})
 }
 
-func (h *Handler) clearCart(c *gin.Context) {
+func (h *Handler) updateCart(c *gin.Context) {
 	id, err := getUserId(c)
 	if err != nil {
 		newErrorResponse(c, http.StatusInternalServerError, err.Error())
 		return
 	}
 
-	err = h.services.Cart.ClearCart(id)
+	var cart models.Cart
+
+	if err := c.BindJSON(&cart); err != nil {
+		newErrorResponse(c, http.StatusBadRequest, err.Error())
+		return
+	}
+
+	err = h.services.Cart.UpdateCart(id, &cart)
 	if err != nil {
 		newErrorResponse(c, http.StatusInternalServerError, err.Error())
 		return
 	}
 	c.JSON(http.StatusOK, map[string]interface{}{
-		"total_price": 0,
+		"request": "update total_price",
 	})
 }
 

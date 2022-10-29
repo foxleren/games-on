@@ -35,7 +35,7 @@ func (h *Handler) InitRoutes() *gin.Engine {
 			cart := authenticated.Group("/cart")
 			{
 				cart.POST("/", h.createCart)
-				cart.PUT("/", h.clearCart)
+				cart.PUT("/", h.updateCart)
 
 				items := cart.Group("/items")
 				{
@@ -45,12 +45,6 @@ func (h *Handler) InitRoutes() *gin.Engine {
 					items.DELETE("/", h.deleteAllCartItems)
 				}
 			}
-			//cartItem := authenticated.Group("/cartItem")
-			//{
-			//	cartItem.POST("/", h.createCartItem)
-			//	cartItem.GET("/", h.getAllCartItems)
-			//	cartItem.DELETE("/:id", h.deleteCartItem)
-			//}
 		}
 		games := api.Group("/games")
 		{

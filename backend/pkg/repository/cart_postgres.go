@@ -25,7 +25,7 @@ func (r *CartPostgres) CreateCart(userId int) (int, error) {
 	return id, nil
 }
 
-func (r *CartPostgres) ClearCart(userId int) error {
+func (r *CartPostgres) UpdateCart(userId int, cart *models.Cart) error {
 	var cartId int
 	getCartIdQuery := fmt.Sprintf("SELECT id FROM %s WHERE user_id = %d", cartsTable, userId)
 	row := r.db.QueryRow(getCartIdQuery)
@@ -34,8 +34,7 @@ func (r *CartPostgres) ClearCart(userId int) error {
 		return err
 	}
 
-	clearCartQuery := fmt.Sprintf("UPDATE %s SET total_price = 0 WHERE user_id = %d", cartsTable, userId)
-
+	clearCartQuery := fmt.Sprintf("UPDATE %s SET total_price = %f WHERE user_id = %d", cartsTable, cart.TotalPrice, userId)
 	_, err := r.db.Exec(clearCartQuery)
 	return err
 }

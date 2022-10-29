@@ -24,7 +24,7 @@ type Game interface {
 
 type Cart interface {
 	CreateCart(userId int) (int, error)
-	ClearCart(userId int) error
+	UpdateCart(userId int, cart *models.Cart) error
 	CreateCartItem(userId, gameId int) error
 	GetAllCartItems(userId int) ([]models.Game, error)
 	DeleteAllCartItems(userId int) error

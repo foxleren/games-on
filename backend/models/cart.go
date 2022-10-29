@@ -1,9 +1,8 @@
 package models
 
 type Cart struct {
-	Id         int        `json:"-" db:"id"`
-	TotalPrice string     `json:"total_price"`
-	CartItems  []CartItem `json:"cart_items"`
+	Id         int     `json:"-" db:"id"`
+	TotalPrice float64 `json:"total_price"`
 }
 
 type CartItem struct {

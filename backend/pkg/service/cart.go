@@ -17,8 +17,8 @@ func (s *CartService) CreateCart(userId int) (int, error) {
 	return s.repo.CreateCart(userId)
 }
 
-func (s *CartService) ClearCart(userId int) error {
-	return s.repo.ClearCart(userId)
+func (s *CartService) UpdateCart(userId int, cart *models.Cart) error {
+	return s.repo.UpdateCart(userId, cart)
 }
 
 func (s *CartService) CreateCartItem(userId, gameId int) error {
