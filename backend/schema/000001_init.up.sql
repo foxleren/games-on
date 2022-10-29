@@ -7,10 +7,11 @@ CREATE TABLE users
 
 CREATE TABLE games
 (
-    id          serial       not null unique,
-    title       varchar(255) not null,
-    description varchar(255) not null,
-    price       float(2)     not null
+    id            serial       not null unique,
+    title         varchar(255) not null,
+    description   varchar(255) not null,
+    price         float(2)     not null,
+    download_link varchar(255) not null
 );
 
 CREATE TABLE carts
@@ -39,4 +40,11 @@ CREATE TABLE games_images
 (
     game_id int references games (id) on delete cascade not null,
     image   varchar(255)                                not null
+);
+
+CREATE TABLE games_links
+(
+    game_id       int references games (id) on delete cascade not null,
+    download_link varchar(255)                                not null,
+    PRIMARY KEY (game_id, download_link)
 );

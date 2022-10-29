@@ -32,7 +32,7 @@ func (r *LibraryPostgres) AddGamesToLibrary(userId int) error {
 func (r *LibraryPostgres) GetAllLibraryGames(userId int) ([]models.Game, error) {
 	var games []models.Game
 
-	getAllCartItemsQuery := fmt.Sprintf("SELECT id, title, description, price FROM %s gt INNER JOIN %s ul on gt.id = ul.game_id WHERE ul.user_id = %d", gamesTable, libraryTable, userId)
+	getAllCartItemsQuery := fmt.Sprintf("SELECT id, title, description, price, download_link FROM %s gt INNER JOIN %s ul on gt.id = ul.game_id WHERE ul.user_id = %d", gamesTable, libraryTable, userId)
 	err := r.db.Select(&games, getAllCartItemsQuery)
 
 	for i := 0; i < len(games); i++ {

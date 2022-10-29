@@ -16,8 +16,8 @@ func NewGamePostgres(db *sqlx.DB) *GamePostgres {
 
 func (r *GamePostgres) CreateGame(game models.Game) (int, error) {
 	var id int
-	createGameQuery := fmt.Sprintf("INSERT INTO %s (title, description, price) VALUES ($1, $2, $3) RETURNING id", gamesTable)
-	row := r.db.QueryRow(createGameQuery, game.Title, game.Description, game.Price)
+	createGameQuery := fmt.Sprintf("INSERT INTO %s (title, description, price, download_link) VALUES ($1, $2, $3, $4) RETURNING id", gamesTable)
+	row := r.db.QueryRow(createGameQuery, game.Title, game.Description, game.Price, game.DownloadLink)
 
 	if err := row.Scan(&id); err != nil {
 		return 0, err
@@ -27,7 +27,7 @@ func (r *GamePostgres) CreateGame(game models.Game) (int, error) {
 
 func (r *GamePostgres) GetAllGames() ([]models.Game, error) {
 	var games []models.Game
-	query := fmt.Sprintf("SELECT * FROM %s", gamesTable)
+	query := fmt.Sprintf("SELECT id, title, description, price FROM %s", gamesTable)
 	err := r.db.Select(&games, query)
 
 	return games, err
