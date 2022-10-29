@@ -33,6 +33,7 @@ type Cart interface {
 
 type Library interface {
 	AddGamesToLibrary(userId int) error
+	GetAllLibraryGames(userId int) ([]models.Game, error)
 }
 
 type Service struct {

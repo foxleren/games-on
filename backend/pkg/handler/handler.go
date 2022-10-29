@@ -49,6 +49,7 @@ func (h *Handler) InitRoutes() *gin.Engine {
 			{
 
 				library.POST("/", h.addGamesToLibrary)
+				library.GET("/", h.getLibraryGames)
 			}
 		}
 		games := api.Group("/games")

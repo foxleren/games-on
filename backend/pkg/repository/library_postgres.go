@@ -2,6 +2,7 @@ package repository
 
 import (
 	"fmt"
+	"github.com/foxleren/GamesOn/backend/models"
 	"github.com/jmoiron/sqlx"
 )
 
@@ -26,4 +27,13 @@ func (r *LibraryPostgres) AddGamesToLibrary(userId int) error {
 	err := r.db.QueryRow(getAllCartItemsQuery)
 
 	return err.Err()
+}
+
+func (r *LibraryPostgres) GetAllLibraryGames(userId int) ([]models.Game, error) {
+	var games []models.Game
+
+	getAllCartItemsQuery := fmt.Sprintf("SELECT id, title, description, price FROM %s gt INNER JOIN %s ul on gt.id = ul.game_id WHERE ul.user_id = %d", gamesTable, libraryTable, userId)
+	err := r.db.Select(&games, getAllCartItemsQuery)
+
+	return games, err
 }
