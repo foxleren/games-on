@@ -34,3 +34,9 @@ CREATE TABLE library
     game_id int references games (id) on delete cascade not null,
     PRIMARY KEY (user_id, game_id)
 );
+
+CREATE TABLE games_images
+(
+    game_id int references games (id) on delete cascade not null,
+    image   varchar(255)                                not null
+);

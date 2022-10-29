@@ -73,6 +73,11 @@ func (r *CartPostgres) GetAllCartItems(userId int) ([]models.Game, error) {
 	getAllCartItemsQuery := fmt.Sprintf("SELECT id, title, description, price FROM %s cg INNER JOIN %s gt on cg.game_id = gt.id WHERE cg.cart_id = %d", cartsGamesTable, gamesTable, cartId)
 	err := r.db.Select(&cartItems, getAllCartItemsQuery)
 
+	for i := 0; i < len(cartItems); i++ {
+		query := fmt.Sprintf("SELECT image FROM %s WHERE game_id = %d", gamesImagesTable, cartItems[i].ID)
+		err = r.db.Select(&cartItems[i].Images, query)
+	}
+
 	return cartItems, err
 }
 

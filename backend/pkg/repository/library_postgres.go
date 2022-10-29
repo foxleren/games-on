@@ -35,5 +35,10 @@ func (r *LibraryPostgres) GetAllLibraryGames(userId int) ([]models.Game, error) 
 	getAllCartItemsQuery := fmt.Sprintf("SELECT id, title, description, price FROM %s gt INNER JOIN %s ul on gt.id = ul.game_id WHERE ul.user_id = %d", gamesTable, libraryTable, userId)
 	err := r.db.Select(&games, getAllCartItemsQuery)
 
+	for i := 0; i < len(games); i++ {
+		query := fmt.Sprintf("SELECT image FROM %s WHERE game_id = %d", gamesImagesTable, games[i].ID)
+		err = r.db.Select(&games[i].Images, query)
+	}
+
 	return games, err
 }
