@@ -25,6 +25,7 @@ type Game interface {
 type Cart interface {
 	CreateCart(userId int) (int, error)
 	ClearCart(userId int) error
+	CreateCartItem(userId, gameId int) error
 }
 
 type Service struct {

@@ -36,7 +36,11 @@ func (h *Handler) InitRoutes() *gin.Engine {
 			{
 				cart.POST("/", h.createCart)
 				cart.PUT("/", h.clearCart)
-				//cart.DELETE("/", h.clearCart)
+
+				items := cart.Group("/items")
+				{
+					items.POST("/:id", h.createCartItem)
+				}
 			}
 			//cartItem := authenticated.Group("/cartItem")
 			//{

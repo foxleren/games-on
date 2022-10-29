@@ -15,9 +15,10 @@ type Config struct {
 }
 
 const (
-	usersTable = "users"
-	gamesTable = "games"
-	cartsTable = "carts"
+	usersTable      = "users"
+	gamesTable      = "games"
+	cartsTable      = "carts"
+	cartsGamesTable = "carts_games"
 )
 
 func NewPostgresDB(cfg Config) (*sqlx.DB, error) {

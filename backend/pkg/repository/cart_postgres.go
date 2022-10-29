@@ -31,6 +31,26 @@ func (r *CartPostgres) ClearCart(userId int) error {
 	return err
 }
 
+func (r *CartPostgres) CreateCartItem(userId, gameId int) error {
+	var cartId int
+	getCartIdQuery := fmt.Sprintf("SELECT id FROM %s WHERE user_id = %d", cartsTable, userId)
+	row := r.db.QueryRow(getCartIdQuery)
+
+	if err := row.Scan(&cartId); err != nil {
+		return err
+	}
+
+	var cartItemId int
+	addCartItemQuery := fmt.Sprintf("INSERT INTO %s (cart_id, game_id) VALUES ($1, $2) RETURNING 1", cartsGamesTable)
+	row = r.db.QueryRow(addCartItemQuery, cartId, gameId)
+
+	if err := row.Scan(&cartItemId); err != nil {
+		return err
+	}
+
+	return nil
+}
+
 //func (r *CartPostgres) CreateCart(userId int) (int, error) {
 //	tx, err := r.db.Begin()
 //	if err != nil {

@@ -19,3 +19,10 @@ CREATE TABLE carts
     user_id     serial   not null unique,
     total_price float(2) not null
 );
+
+CREATE TABLE carts_games
+(
+    cart_id int references carts (id) on delete cascade not null,
+    game_id int references games (id) on delete cascade not null,
+    PRIMARY KEY (cart_id, game_id)
+);
