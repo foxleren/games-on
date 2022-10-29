@@ -77,6 +77,20 @@ func (r *CartPostgres) GetAllCartItems(userId int) ([]models.Game, error) {
 	return cartItems, err
 }
 
+func (r *CartPostgres) DeleteAllCartItems(userId int) error {
+	var cartId int
+	getCartIdQuery := fmt.Sprintf("SELECT id FROM %s WHERE user_id = %d", cartsTable, userId)
+	row := r.db.QueryRow(getCartIdQuery)
+
+	if err := row.Scan(&cartId); err != nil {
+		return err
+	}
+
+	deleteAllCartItemsQuery := fmt.Sprintf("DELETE FROM %s WHERE cart_id = %d", cartsGamesTable, cartId)
+	_, err := r.db.Exec(deleteAllCartItemsQuery)
+	return err
+}
+
 //func (r *CartPostgres) CreateCart(userId int) (int, error) {
 //	tx, err := r.db.Begin()
 //	if err != nil {

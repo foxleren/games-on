@@ -28,3 +28,7 @@ func (s *CartService) CreateCartItem(userId, gameId int) error {
 func (s *CartService) GetAllCartItems(userId int) ([]models.Game, error) {
 	return s.repo.GetAllCartItems(userId)
 }
+
+func (s *CartService) DeleteAllCartItems(userId int) error {
+	return s.repo.DeleteAllCartItems(userId)
+}
