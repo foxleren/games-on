@@ -22,7 +22,15 @@ CREATE TABLE carts
 
 CREATE TABLE carts_games
 (
+    user_id int references users (id) on delete cascade not null,
     cart_id int references carts (id) on delete cascade not null,
     game_id int references games (id) on delete cascade not null,
     PRIMARY KEY (cart_id, game_id)
+);
+
+CREATE TABLE library
+(
+    user_id int references users (id) on delete cascade not null,
+    game_id int references games (id) on delete cascade not null,
+    PRIMARY KEY (user_id, game_id)
 );

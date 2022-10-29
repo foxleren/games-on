@@ -45,6 +45,11 @@ func (h *Handler) InitRoutes() *gin.Engine {
 					items.DELETE("/", h.deleteAllCartItems)
 				}
 			}
+			library := authenticated.Group("/library")
+			{
+
+				library.POST("/", h.addGamesToLibrary)
+			}
 		}
 		games := api.Group("/games")
 		{

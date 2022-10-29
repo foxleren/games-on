@@ -19,6 +19,7 @@ const (
 	gamesTable      = "games"
 	cartsTable      = "carts"
 	cartsGamesTable = "carts_games"
+	libraryTable    = "library"
 )
 
 func NewPostgresDB(cfg Config) (*sqlx.DB, error) {

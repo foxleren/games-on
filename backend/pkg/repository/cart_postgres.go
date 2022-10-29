@@ -49,8 +49,8 @@ func (r *CartPostgres) CreateCartItem(userId, gameId int) error {
 	}
 
 	var cartItemId int
-	addCartItemQuery := fmt.Sprintf("INSERT INTO %s (cart_id, game_id) VALUES ($1, $2) RETURNING 1", cartsGamesTable)
-	row = r.db.QueryRow(addCartItemQuery, cartId, gameId)
+	addCartItemQuery := fmt.Sprintf("INSERT INTO %s (user_id, cart_id, game_id) VALUES ($1, $2, $3) RETURNING 1", cartsGamesTable)
+	row = r.db.QueryRow(addCartItemQuery, userId, cartId, gameId)
 
 	if err := row.Scan(&cartItemId); err != nil {
 		return err

@@ -31,11 +31,16 @@ type Cart interface {
 	DeleteCartItemsById(userId, cartItemId int) error
 }
 
+type Library interface {
+	AddGamesToLibrary(userId int) error
+}
+
 type Service struct {
 	Authorization
 	User
 	Game
 	Cart
+	Library
 }
 
 func NewService(repos *repository.Repository) *Service {
@@ -44,5 +49,6 @@ func NewService(repos *repository.Repository) *Service {
 		User:          NewUserService(repos.User),
 		Cart:          NewCartService(repos.Cart),
 		Game:          NewGameService(repos.Game),
+		Library:       NewLibraryService(repos.Library),
 	}
 }

@@ -30,11 +30,16 @@ type Cart interface {
 	DeleteCartItemsById(userId, cartItemId int) error
 }
 
+type Library interface {
+	AddGamesToLibrary(userId int) error
+}
+
 type Repository struct {
 	Authorization
 	User
 	Game
 	Cart
+	Library
 }
 
 func NewRepository(db *sqlx.DB) *Repository {
@@ -43,5 +48,6 @@ func NewRepository(db *sqlx.DB) *Repository {
 		User:          NewUserPostgres(db),
 		Cart:          NewCartPostgres(db),
 		Game:          NewGamePostgres(db),
+		Library:       NewLibraryPostgres(db),
 	}
 }
