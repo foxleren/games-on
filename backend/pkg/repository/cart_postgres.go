@@ -2,6 +2,7 @@ package repository
 
 import (
 	"fmt"
+	"github.com/foxleren/GamesOn/backend/models"
 	"github.com/jmoiron/sqlx"
 )
 
@@ -25,6 +26,14 @@ func (r *CartPostgres) CreateCart(userId int) (int, error) {
 }
 
 func (r *CartPostgres) ClearCart(userId int) error {
+	var cartId int
+	getCartIdQuery := fmt.Sprintf("SELECT id FROM %s WHERE user_id = %d", cartsTable, userId)
+	row := r.db.QueryRow(getCartIdQuery)
+
+	if err := row.Scan(&cartId); err != nil {
+		return err
+	}
+
 	clearCartQuery := fmt.Sprintf("UPDATE %s SET total_price = 0 WHERE user_id = %d", cartsTable, userId)
 
 	_, err := r.db.Exec(clearCartQuery)
@@ -49,6 +58,23 @@ func (r *CartPostgres) CreateCartItem(userId, gameId int) error {
 	}
 
 	return nil
+}
+
+func (r *CartPostgres) GetAllCartItems(userId int) ([]models.Game, error) {
+	var cartItems []models.Game
+
+	var cartId int
+	getCartIdQuery := fmt.Sprintf("SELECT id FROM %s WHERE user_id = %d", cartsTable, userId)
+	row := r.db.QueryRow(getCartIdQuery)
+
+	if err := row.Scan(&cartId); err != nil {
+		return nil, err
+	}
+
+	getAllCartItemsQuery := fmt.Sprintf("SELECT id, title, description, price FROM %s cg INNER JOIN %s gt on cg.game_id = gt.id WHERE cg.cart_id = %d", cartsGamesTable, gamesTable, cartId)
+	err := r.db.Select(&cartItems, getAllCartItemsQuery)
+
+	return cartItems, err
 }
 
 //func (r *CartPostgres) CreateCart(userId int) (int, error) {

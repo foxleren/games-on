@@ -2,6 +2,7 @@ package handler
 
 import (
 	"github.com/gin-gonic/gin"
+	"github.com/siruspen/logrus"
 	"net/http"
 	"strconv"
 )
@@ -65,4 +66,26 @@ func (h *Handler) createCartItem(c *gin.Context) {
 		"game_id": gameId,
 		"request": "add to cart",
 	})
+}
+
+func (h *Handler) getAllCartItems(c *gin.Context) {
+	userId, err := getUserId(c)
+	if err != nil {
+		newErrorResponse(c, http.StatusInternalServerError, err.Error())
+		return
+	}
+	logrus.Printf("INSIDE")
+	cartItems, err := h.services.GetAllCartItems(userId)
+	if err != nil {
+		newErrorResponse(c, http.StatusInternalServerError, err.Error())
+		return
+	}
+
+	c.JSON(http.StatusOK, map[string]interface{}{
+		"data": cartItems,
+	})
+}
+
+func (h *Handler) deleteAllCartItems(c *gin.Context) {
+	
 }

@@ -1,6 +1,7 @@
 package service
 
 import (
+	"github.com/foxleren/GamesOn/backend/models"
 	"github.com/foxleren/GamesOn/backend/pkg/repository"
 )
 
@@ -22,4 +23,8 @@ func (s *CartService) ClearCart(userId int) error {
 
 func (s *CartService) CreateCartItem(userId, gameId int) error {
 	return s.repo.CreateCartItem(userId, gameId)
+}
+
+func (s *CartService) GetAllCartItems(userId int) ([]models.Game, error) {
+	return s.repo.GetAllCartItems(userId)
 }
