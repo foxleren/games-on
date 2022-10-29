@@ -28,6 +28,7 @@ type Cart interface {
 	CreateCartItem(userId, gameId int) error
 	GetAllCartItems(userId int) ([]models.Game, error)
 	DeleteAllCartItems(userId int) error
+	DeleteCartItemsById(userId, cartItemId int) error
 }
 
 type Service struct {

@@ -32,3 +32,7 @@ func (s *CartService) GetAllCartItems(userId int) ([]models.Game, error) {
 func (s *CartService) DeleteAllCartItems(userId int) error {
 	return s.repo.DeleteAllCartItems(userId)
 }
+
+func (s *CartService) DeleteCartItemsById(userId, cartItemId int) error {
+	return s.repo.DeleteCartItemsById(userId, cartItemId)
+}

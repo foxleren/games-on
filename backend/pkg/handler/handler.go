@@ -41,7 +41,7 @@ func (h *Handler) InitRoutes() *gin.Engine {
 				{
 					items.POST("/:id", h.createCartItem)
 					items.GET("/", h.getAllCartItems)
-					//items.DELETE("/:id", h.deleteCartItemByID)
+					items.DELETE("/:id", h.deleteCartItemByID)
 					items.DELETE("/", h.deleteAllCartItems)
 				}
 			}
