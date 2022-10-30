@@ -1,0 +1,158 @@
+.cart-container {
+  //padding: 80px 90px;
+  max-width: 1500px;
+  margin: 0 auto;
+}
+
+.cart-title {
+  font-weight: 900;
+  font-size: 30px;
+  line-height: 93.5%;
+  color: #FFFFFF;
+
+  margin-bottom: 60px;
+}
+
+.cart-items-container {
+
+}
+
+.cart-card-container {
+  background: #1E2734;
+  border-radius: 10px;
+  padding: 16px 32px 16px 16px;
+  display: flex;
+  justify-content: space-between;
+
+  position: relative;
+
+  &:not(:last-child) {
+    margin-bottom: 20px;
+  }
+
+  img {
+    width: 184px;
+    height: 218px;
+    border-radius: 10px;
+  }
+}
+
+.cart-card-info {
+  display: flex;
+}
+
+.cart-card-text {
+  max-width: 320px;
+  margin-left: 35px;
+}
+
+.cart-card-name {
+  font-weight: 700;
+  font-size: 25px;
+  line-height: 31px;
+
+  color: #FFFFFF;
+
+  margin-bottom: 16px;
+}
+
+.cart-card-description {
+  font-weight: 300;
+  font-size: 20px;
+  line-height: 25px;
+
+  color: #98A9C1;
+}
+
+.cart-card-right {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-end;
+
+ // padding: 10px;
+
+  //position: absolute;
+  right: 0;
+  top: 0;
+  height: auto;
+}
+
+.remove-from-cart {
+  background: url(../../../public/images/remove_from_cart.svg);
+  width: 29px;
+  height: 29px;
+  cursor: pointer;
+}
+
+.cart-card-price {
+  font-weight: 700;
+  font-size: 30px;
+  line-height: 38px;
+  /* identical to box height */
+
+
+  color: #468DDE;
+}
+
+.cart-schild {
+  background: #1E2734;
+  border-radius: 10px;
+  padding: 16px 32px 16px 16px;
+
+  margin-top: 30px;
+  margin-bottom: 40px;
+}
+
+.cart-schild-items {
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 93.5%;
+  /* identical to box height, or 19px */
+
+
+  color: #FFFFFF;
+
+  display: flex;
+  justify-content: space-between;
+
+  margin-bottom: 30px;
+  span {
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 93.5%;
+    /* identical to box height, or 19px */
+
+
+    color: #FFFFFF;
+  }
+}
+
+.cart-schild-total-cost {
+  font-weight: 700;
+  font-size: 30px;
+  line-height: 38px;
+  /* identical to box height */
+
+
+  color: #FFFFFF;
+
+  display: flex;
+  justify-content: space-between;
+  span {
+    font-weight: 700;
+    font-size: 30px;
+    line-height: 38px;
+    /* identical to box height */
+
+
+    color: #468DDE;
+  }
+}
+
+.cart-buttons {
+  display: flex;
+  &>div:first-child {
+  margin-right: 10px;
+  }
+}

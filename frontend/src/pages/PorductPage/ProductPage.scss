@@ -1,0 +1,40 @@
+.product-page {
+  //padding: 300px 0;
+  max-width: 1500px;
+  margin: 0 auto;
+  padding: 80px 90px 0 90px;
+
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.product-title {
+  font-weight: 900;
+  font-size: 30px;
+  line-height: 93.5%;
+  /* identical to box height, or 28px */
+
+
+  color: #FFFFFF;
+  margin-bottom: 50px;
+}
+
+.product-description {
+  max-width: 900px;
+  font-weight: 300;
+  font-size: 20px;
+  line-height: 25px;
+
+  color: #FFFFFF;
+  &:not(:last-child) {
+    margin-bottom: 25px;
+  }
+}
+
+.product-buttons {
+  display: flex;
+  &>div:first-child {
+  margin-right: 10px;
+  }
+}

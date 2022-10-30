@@ -1,0 +1,30 @@
+.schild-container {
+  padding: 44px 25px;
+  background: #1E2734;
+  border-radius: 10px;
+
+  display: flex;
+  align-items: flex-end;
+}
+
+.schild-title {
+  font-weight: 900;
+  font-size: 30px;
+  line-height: 28px;
+  width: 320px;
+  margin-right: 160px;
+}
+
+.soldout-counter-container {
+  font-weight: 300;
+  font-size: 20px;
+  line-height: 19px;
+
+  margin-left: 160px;
+  span {
+    font-weight: 700;
+    font-size: 30px;
+    line-height: 28px;
+    color: #468DDE;
+  }
+}

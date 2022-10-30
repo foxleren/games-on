@@ -1,0 +1,18 @@
+.button-container {
+  font-weight: 500;
+  font-size: 17px;
+  line-height: 16px;
+
+  padding: 12px 30px;
+  border-radius: 10px;
+  width: fit-content;
+  cursor: pointer;
+
+  &.blue {
+    background: #468DDE;
+  }
+
+  &.purple {
+    background: #6041BA;
+  }
+}
