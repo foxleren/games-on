@@ -14,7 +14,7 @@
 *.out
 
 #Env files
-.env
+
 
 # Dependency directories (remove the comment below to include it)
 # vendor/
