@@ -15,7 +15,7 @@ func NewHandler(s *service.Service) *Handler {
 
 func (h *Handler) InitRoutes() *gin.Engine {
 	router := gin.New()
-
+	router.Use(CORSMiddleware())
 	auth := router.Group("/auth")
 	{
 		auth.POST("/sign-up", h.signUp)
