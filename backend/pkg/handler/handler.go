@@ -4,7 +4,6 @@ import (
 	"github.com/foxleren/GamesOn/backend/pkg/service"
 
 	"github.com/gin-gonic/gin"
-	cors "github.com/rs/cors/wrapper/gin"
 )
 
 type Handler struct {
@@ -39,7 +38,7 @@ func CORS() gin.HandlerFunc {
 func (h *Handler) InitRoutes() *gin.Engine {
 	router := gin.Default()
 
-	router.Use(cors.Default())
+	router.Use(CORSMiddleware())
 	auth := router.Group("/auth")
 	{
 		auth.POST("/sign-up", h.signUp)
