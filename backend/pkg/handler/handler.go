@@ -2,7 +2,9 @@ package handler
 
 import (
 	"github.com/foxleren/GamesOn/backend/pkg/service"
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
+	"time"
 )
 
 type Handler struct {
@@ -30,10 +32,23 @@ func CORS() gin.HandlerFunc {
 }
 
 func (h *Handler) InitRoutes() *gin.Engine {
-	//gin.SetMode(gin.ReleaseMode)
-	router := gin.New()
-
-	router.Use(CORS())
+	router := gin.Default()
+	// CORS for https://foo.com and https://github.com origins, allowing:
+	// - PUT and PATCH methods
+	// - Origin header
+	// - Credentials share
+	// - Preflight requests cached for 12 hours
+	router.Use(cors.New(cors.Config{
+		AllowOrigins:     []string{"http://localhost:3000"},
+		AllowMethods:     []string{"PUT", "PATCH"},
+		AllowHeaders:     []string{"Origin"},
+		ExposeHeaders:    []string{"Content-Length"},
+		AllowCredentials: true,
+		AllowOriginFunc: func(origin string) bool {
+			return origin == "https://github.com"
+		},
+		MaxAge: 12 * time.Hour,
+	}))
 
 	auth := router.Group("/auth")
 	{
