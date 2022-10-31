@@ -9,7 +9,7 @@ CREATE TABLE games
 (
     id            serial       not null unique,
     title         varchar(255) not null,
-    description   varchar(255) not null,
+    description   varchar(1000) not null,
     price         float(2)     not null,
     download_link varchar(255) not null
 );
