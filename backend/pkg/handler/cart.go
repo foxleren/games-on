@@ -88,9 +88,7 @@ func (h *Handler) getAllCartItems(c *gin.Context) {
 		return
 	}
 
-	c.JSON(http.StatusOK, map[string]interface{}{
-		"data": cartItems,
-	})
+	c.JSON(http.StatusOK, cartItems)
 }
 
 func (h *Handler) deleteCartItemByID(c *gin.Context) {
