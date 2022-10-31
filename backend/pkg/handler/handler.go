@@ -33,11 +33,8 @@ func CORS() gin.HandlerFunc {
 func (h *Handler) InitRoutes() *gin.Engine {
 	gin.SetMode(gin.ReleaseMode)
 	router := gin.New()
-	config := cors.DefaultConfig()
-	config.AllowAllOrigins = true
-	config.AllowCredentials = true
-	config.AddAllowHeaders("authorization")
-	router.Use(cors.New(config))
+
+	router.Use(cors.Default())
 
 	auth := router.Group("/auth")
 	{
