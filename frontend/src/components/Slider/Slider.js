@@ -1,12 +1,11 @@
 import './Slider.scss';
 import React from 'react';
-import {contentPrefix} from "../../js/globals";
 
-const images = [`${contentPrefix}/images/slider/slider_3.jpg`, `${contentPrefix}/images/slider/slider_3.jpg`, `${contentPrefix}/images/slider/slider_3.jpg`, `${contentPrefix}/images/slider/slider_3.jpg`,]
-export default function Slider() {
+//const images = [`${contentPrefix}/images/slider/slider_3.jpg`, `${contentPrefix}/images/slider/slider_3.jpg`, `${contentPrefix}/images/slider/slider_3.jpg`, `${contentPrefix}/images/slider/slider_3.jpg`,]
+export default function Slider({images}) {
     const [activeSlide, setActiveSlide] = React.useState(1);
 
-    console.log(activeSlide)
+    // console.log(activeSlide)
 
     const setNextSlide = () => {
         let nextSlide = activeSlide + 1;

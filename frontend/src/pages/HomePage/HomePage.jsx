@@ -5,42 +5,20 @@ import CreateAccountSchild from "../../components/CreateAccountSchild/CreateAcco
 import Leaderboard from "../../components/Leaderboard/Leaderboard";
 import StatsSchilds from "../../components/StatsSchilds/StatsSchilds";
 import Footer from "../../components/Footer/Footer";
+import {useContext, useEffect} from "react";
+import {getAllGames} from "../../http/gameAPI";
+import {Context} from "../../index";
+import {observer} from "mobx-react-lite";
 
-import axios from 'axios';
 
-// axios({
-//     method: 'get',
-//     url: 'http://79.143.30.155:8000/api/games/',
-//     responseType: 'stream'
-// })
-//     .then(function (response) {
-//         console.log(response)
-//     });
-const config = {
-    headers: {
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS"
-    }
-};
+const HomePage = observer(() => {
+    const {game} = useContext(Context)
+    useEffect(() => {
+        getAllGames().then(data => {
+            game.setGames(data)
+        })
+    }, [])
 
-axios({
-    method: 'get',
-    url: 'http://localhost:8000/api/games/',
-    withCredentials: false,
-    data: '',
-    headers: {
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS"
-    }
-})
-    .then(resp => {
-        console.log(resp)
-    })
-    .catch(err => {
-
-    })
-
-export default function HomePage() {
     return (
         <div className={'home-page'}>
             <StatsSchilds/>
@@ -51,4 +29,6 @@ export default function HomePage() {
             <Footer page={'home'}/>
         </div>
     );
-}
+})
+
+export default HomePage;

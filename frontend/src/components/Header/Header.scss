@@ -24,7 +24,7 @@ header {
   align-items: center;
 }
 
-.header-menu-item {
+.header-menu-item, .header-menu>a {
   font-weight: 300;
   font-size: 17px;
   line-height: 93.5%;
@@ -41,10 +41,16 @@ header {
 }
 
 .header-cart {
-  background-image: url(../../../public/images/cart.svg);
+  background-image: url(../../../public/images/blue_cart.svg);
   width: 29px;
   height: 29px;
   margin-right: 40px;
 
   cursor: pointer;
+
+  transition: all 0.3s ease-in-out;
+
+  &.empty {
+    background-image: url(../../../public/images/cart.svg);
+  }
 }

@@ -1,30 +1,37 @@
 import './Header.scss';
 import Button from "../Button/Button";
-import useAuthForm from "../../hooks/useAuthForm";
-import { Link } from "react-router-dom";
+import {Link} from "react-router-dom";
+import {CART_ROUTE, HOME_ROUTE} from "../../utils/consts";
+import {useContext} from "react";
+import {Context} from "../../index";
+import {observer} from "mobx-react-lite";
+import {getLibrary} from "../../http/libraryAPI";
 
-export default function Header() {
-    const {setIsAuthFormVisible} = useAuthForm();
+const Header = observer(() => {
+    const {user, authForm, cart} = useContext(Context)
     return (
         <header>
             <div className={'header-container'}>
-                <Link to={'/'}>
+                <Link to={HOME_ROUTE}>
                     <div className={'header-logo'}/>
                 </Link>
                 <div className={'header-menu'}>
-                    <div className={'header-menu-item'}>All games</div>
-                    <div className={'header-menu-item'}>Leaderboard</div>
+                    <Link to={HOME_ROUTE}>
+                        <div className={'header-menu-item'}>All games</div>
+                    </Link>
                     <div className={'header-menu-item'}>Contacts</div>
-                    <div className={'header-menu-item'}>Personal account</div>
+                    <div className={'header-menu-item'} onClick={() => getLibrary()}>Personal account</div>
                 </div>
                 <div className={'header-right'}>
-                    <Link to={'/cart'}>
-                        <div className={'header-cart'}/>
+                    <Link to={CART_ROUTE}>
+                        <div className={`header-cart ${cart.isCartEmpty ? 'empty' : ''}`}/>
                     </Link>
-                    <Button backgroundColor={'blue'} content={'Log in / Register'}
-                            action={() => setIsAuthFormVisible(true)}/>
+                    {!user.isAuth && <Button backgroundColor={'blue'} content={'Log in / Register'}
+                                             action={() => authForm.setIsAuthFormVisible(true)}/>}
                 </div>
             </div>
         </header>
     );
-}
+})
+
+export default Header;

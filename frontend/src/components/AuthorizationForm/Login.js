@@ -1,37 +1,40 @@
 import React from "react";
 
-export default function Login() {
+export default function Login({submitFunc = () => {}}) {
     const [isPasswordVisible, setIsPasswordVisible] = React.useState(false);
 
-    const completeForm = async (e) => {
-        e.preventDefault();
-        // axios.post('http://localhost:8080/emails', {
-        //     name: toSend.from_name,
-        //     phoneNumber: phoneNumber
-        // }).then(() => {
-        //     //console.log('successful request');
-        //     setIsFormCompleted(true);
-        // }).catch((err) => console.log(err));
-    }
+    const [email, setEmail] = React.useState('');
+    const [password, setPassword] = React.useState('');
+
+    // const completeForm = async (e) => {
+    //     e.preventDefault();
+    //     let user = await signIn(email, password)
+    //
+    // }
 
     return (<div className="auth-form-content">
-        <div className={'google-auth-button'}>
-            REGISTER WITH <div className={'google-auth-icon'}/>
-        </div>
-        <div className="auth-input-container">
-            <input placeholder={'Login / Email'}/>
-        </div>
-        <form onSubmit={completeForm}>
-            <div className="auth-input-container" >
-                <input type={isPasswordVisible ? "text" : "password"} placeholder={'Password'}/>
+        {/*<div className={'google-auth-button'}>*/}
+        {/*    REGISTER WITH <div className={'google-auth-icon'}/>*/}
+        {/*</div>*/}
+        <form onSubmit={(e) => submitFunc(e, {email, password})}>
+            <div className="auth-input-container">
+                <input type={'email'} placeholder={'Email'} value={email} onChange={(e) => setEmail(e.target.value)}
+                       required/>
+            </div>
+
+            <div className="auth-input-container">
+                <input type={isPasswordVisible ? "text" : "password"} placeholder={'Password'} value={password}
+                       onChange={(e) => setPassword(e.target.value)} required/>
                 {isPasswordVisible ? (
-                    <svg onClick={() => setIsPasswordVisible(!isPasswordVisible)} width="24" viewBox="0 0 24 24" height="24"
+                    <svg onClick={() => setIsPasswordVisible(!isPasswordVisible)} width="24" viewBox="0 0 24 24"
+                         height="24"
                          fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path xmlns="http://www.w3.org/2000/svg" clipRule="evenodd"
                               d="m12 6.00018c-6.54545 0-9 6.00002-9 6.00002s2.45455 6 9 6c4.9091 0 9-6 9-6s-4.0909-6.00002-9-6.00002zm-3 6.00002c0 1.6568 1.3431 3 3 3s3-1.3432 3-3c0-1.6569-1.3431-3.00002-3-3.00002s-3 1.34312-3 3.00002z"
                               fill="#ffb300" fillRule="evenodd"></path>
                     </svg>) : (
-                    <svg onClick={() => setIsPasswordVisible(!isPasswordVisible)} width="24" viewBox="0 0 24 24" height="24"
+                    <svg onClick={() => setIsPasswordVisible(!isPasswordVisible)} width="24" viewBox="0 0 24 24"
+                         height="24"
                          fill="none" xmlns="http://www.w3.org/2000/svg">
                         <g xmlns="http://www.w3.org/2000/svg" fill="#ffb300">
                             <path clipRule="evenodd"
@@ -46,7 +49,7 @@ export default function Login() {
                     </svg>)}
 
             </div>
-            <button className="form-button" type='submit'>Log in</button>
+            <button className="form-button" type={'submit'}>Log in</button>
         </form>
 
 
