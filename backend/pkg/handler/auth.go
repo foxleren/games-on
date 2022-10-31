@@ -13,14 +13,24 @@ func (h *Handler) signUp(c *gin.Context) {
 		newErrorResponse(c, http.StatusBadRequest, err.Error())
 		return
 	}
-	id, err := h.services.Authorization.CreateUser(input)
+	err := h.services.Authorization.CreateUser(input)
+
 	if err != nil {
 		newErrorResponse(c, http.StatusInternalServerError, err.Error())
 		return
 	}
+	token, err := h.services.Authorization.GenerateToken(input.Email, input.Password)
+	if err != nil {
+		newErrorResponse(c, http.StatusInternalServerError, err.Error())
+		return
+	}
+
 	c.JSON(http.StatusOK, map[string]interface{}{
-		"id": id,
+		"token": token,
 	})
+	//c.JSON(http.StatusOK, map[string]interface{}{
+	//	"id": id,
+	//})
 }
 
 type signInData struct {
