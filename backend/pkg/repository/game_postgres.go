@@ -30,6 +30,11 @@ func (r *GamePostgres) GetAllGames() ([]models.Game, error) {
 	query := fmt.Sprintf("SELECT id, title, description, price FROM %s", gamesTable)
 	err := r.db.Select(&games, query)
 
+	for i := 0; i < len(games); i++ {
+		query := fmt.Sprintf("SELECT image FROM %s WHERE game_id = %d", gamesImagesTable, games[i].ID)
+		err = r.db.Select(&games[i].Images, query)
+	}
+
 	return games, err
 }
 
@@ -37,6 +42,9 @@ func (r *GamePostgres) GetGameById(gameId int) (models.Game, error) {
 	var game models.Game
 	query := fmt.Sprintf("SELECT id, title, description, price FROM %s WHERE id = $1", gamesTable)
 	err := r.db.Get(&game, query, gameId)
+
+	getImagesQuery := fmt.Sprintf("SELECT image FROM %s WHERE game_id = %d", gamesImagesTable, game.ID)
+	err = r.db.Select(&game.Images, getImagesQuery)
 
 	return game, err
 }
