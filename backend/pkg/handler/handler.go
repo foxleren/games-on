@@ -2,8 +2,9 @@ package handler
 
 import (
 	"github.com/foxleren/GamesOn/backend/pkg/service"
-	"github.com/gin-contrib/cors"
+
 	"github.com/gin-gonic/gin"
+	cors "github.com/rs/cors/wrapper/gin"
 )
 
 type Handler struct {
