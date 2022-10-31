@@ -2,6 +2,7 @@ package handler
 
 import (
 	"github.com/foxleren/GamesOn/backend/pkg/service"
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 )
 
@@ -15,7 +16,7 @@ func NewHandler(s *service.Service) *Handler {
 
 func (h *Handler) InitRoutes() *gin.Engine {
 	router := gin.New()
-	router.Use(CORSMiddleware())
+	router.Use(cors.Default())
 	auth := router.Group("/auth")
 	{
 		auth.POST("/sign-up", h.signUp)
