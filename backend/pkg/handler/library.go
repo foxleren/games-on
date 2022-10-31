@@ -36,7 +36,5 @@ func (h *Handler) getLibraryGames(c *gin.Context) {
 		return
 	}
 
-	c.JSON(http.StatusOK, map[string]interface{}{
-		"data": games,
-	})
+	c.JSON(http.StatusOK, games)
 }
