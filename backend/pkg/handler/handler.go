@@ -2,6 +2,7 @@ package handler
 
 import (
 	"github.com/foxleren/GamesOn/backend/pkg/service"
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 )
 
@@ -29,18 +30,18 @@ func CORS() gin.HandlerFunc {
 }
 
 func (h *Handler) InitRoutes() *gin.Engine {
-	gin.SetMode(gin.ReleaseMode)
+	//gin.SetMode(gin.ReleaseMode)
 	router := gin.New()
 
-	router.Use(CORS())
+	//router.Use(CORS())
 
-	auth := router.Group("/auth")
+	auth := router.Group("/auth", cors.Default())
 	{
 		auth.POST("/sign-up", h.signUp)
 		auth.POST("/sign-in", h.signIn)
 	}
 
-	api := router.Group("/api")
+	api := router.Group("/api", cors.Default())
 	{
 		authenticated := api.Group("/user", h.userIdentity)
 		{
