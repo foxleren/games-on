@@ -36,7 +36,7 @@ const ProductPage = observer(() => {
         <div className={'product-title'}>
             {game.title}
         </div>
-        <Slider images={game.images.slice(1)}/>
+        <Slider images={game.images != null ? game.images.slice(1) : []}/>
         <div className={'product-description'}>
             {game.description}
         </div>
