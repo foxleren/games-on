@@ -27,7 +27,7 @@ func (r *GamePostgres) CreateGame(game models.Game) (int, error) {
 
 func (r *GamePostgres) GetAllGames() ([]models.Game, error) {
 	var games []models.Game
-	query := fmt.Sprintf("SELECT id, title, description, price FROM %s", gamesTable)
+	query := fmt.Sprintf("SELECT id, title, description, price, download_link FROM %s", gamesTable)
 	err := r.db.Select(&games, query)
 
 	for i := 0; i < len(games); i++ {
