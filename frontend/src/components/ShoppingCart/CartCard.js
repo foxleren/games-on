@@ -10,8 +10,8 @@ export default function CartCard({product, currency}) {
         <div className={'cart-card-info'}>
             <img src={product.images[0]} alt={''}/>
             <div className={'cart-card-text'}>
-                <div className={'cart-card-name'}>{product.name}</div>
-                <div className={'cart-card-description'}>{product.description.substring(0, 100) + '...'}</div>
+                <div className={'cart-card-name'}>{product.title}</div>
+                <div className={'cart-card-description'}>{product.description.substring(0, 200) + '...'}</div>
             </div>
         </div>
 

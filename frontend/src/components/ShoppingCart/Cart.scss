@@ -42,8 +42,10 @@
 }
 
 .cart-card-text {
-  max-width: 320px;
-  margin-left: 35px;
+  //max-width: 500px;
+  //width: 60%;
+  padding: 0 32px;
+
 }
 
 .cart-card-name {
@@ -69,7 +71,7 @@
   flex-direction: column;
   justify-content: space-between;
   align-items: flex-end;
-
+width: 130px;
  // padding: 10px;
 
   //position: absolute;
