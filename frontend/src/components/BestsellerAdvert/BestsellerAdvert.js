@@ -8,13 +8,13 @@ import useAuthForm from "../../hooks/useAuthForm";
 import usePreloader from "../../hooks/usePreloader";
 
 export default function BestsellerAdvert() {
-    const {game, cart, user} = useContext(Context)
+    const {game, user} = useContext(Context)
     const {setIsAuthFormVisible} = useAuthForm()
     const {navigateToWithPreloader} = usePreloader()
     const addGameToCart = async () => {
         const indexOfBestseller = game.games.findIndex((game) => game.title === 'Rue la résistance')
         await addToCart(game.games[indexOfBestseller].id)
-        cart.addCartItem(game.games[indexOfBestseller])
+        user.addCartItem(game.games[indexOfBestseller])
     }
 
     const clickAddToCart = async () => {

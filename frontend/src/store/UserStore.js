@@ -19,6 +19,10 @@ export default class UserStore {
     }
 
     //---------------
+    get library() {
+        return this._library
+    }
+
     get totalPrice() {
         return this._CartTotalPrice
     }
@@ -27,14 +31,13 @@ export default class UserStore {
         return this._cartItems.length === 0;
     }
 
-    get library() {
-        return this._library
-    }
-
     setLibrary(library) {
         this._library = library
     }
 
+    //---------------
+
+    //-----------
     setIsAuth(authStatus) {
         this._isAuth = authStatus
     }
@@ -49,6 +52,10 @@ export default class UserStore {
 
     setCartItems(cartItems) {
         this._cartItems = cartItems
+    }
+
+    get cartItems() {
+        return this._cartItems
     }
 
     setCartTotalPrice(totalPrice) {

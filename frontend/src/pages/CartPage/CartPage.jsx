@@ -10,7 +10,7 @@ import Button from "../../components/Button/Button";
 import usePreloader from "../../hooks/usePreloader";
 
 const CartPage = observer(() => {
-    const {cart} = useContext(Context)
+    const {user} = useContext(Context)
     const {showPreloader} = usePreloader()
     useEffect(() => {
         // showPreloader()
@@ -28,7 +28,7 @@ const CartPage = observer(() => {
 
     const clearCart = async() => {
         await deleteAllCartItems()
-        cart.setCartItems([])
+        user.setCartItems([])
     }
 
     const currency = '€';
@@ -47,16 +47,16 @@ const CartPage = observer(() => {
             <div className={'cart-container'}>
                 <div className={'cart-title'}>Shopping cart</div>
                 <div className={'cart-items-container'}>
-                    {cart.cartItems.map((item, index) => {
+                    {user.cartItems.map((item, index) => {
                         return <CartCard key={index} product={item} currency={currency}/>
                     })}
                 </div>
                 <div className={'cart-schild'}>
                     <div className={'cart-schild-items'}>
-                        Items: <span>{cart.cartItems.length}</span>
+                        Items: <span>{user.cartItems.length}</span>
                     </div>
                     <div className={'cart-schild-total-cost'}>
-                        Total cost: <span>{`${countTotalCost(cart.cartItems).toFixed(1)} ${currency}`}</span>
+                        Total cost: <span>{`${countTotalCost(user.cartItems).toFixed(1)} ${currency}`}</span>
                     </div>
                 </div>
                 <div className={'cart-buttons'}>

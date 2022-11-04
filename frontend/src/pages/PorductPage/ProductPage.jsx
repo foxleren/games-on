@@ -32,7 +32,7 @@ const ProductPage = observer(() => {
 
     const addGameToCart = async () => {
         await addToCart(id)
-        cart.addCartItem(game)
+        user.addCartItem(game)
     }
 
     const clickAddToCart = async () => {
