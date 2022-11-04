@@ -1,12 +1,10 @@
 import './BestsellerAdvert.scss';
 import Button from "../Button/Button";
-import {CART_ROUTE} from "../../utils/consts";
+import {GAME_ROUTE} from "../../utils/consts";
 import React, {useContext, useEffect} from "react";
 import {Context} from "../../index";
 import useAuthForm from "../../hooks/useAuthForm";
 import usePreloader from "../../hooks/usePreloader";
-import {ClickAddToCart, ClickRemoveFromCart, containsInCart, containsInLibrary} from "../../js/ApiStorageHandlers";
-import {getAllGames} from "../../http/gameAPI";
 
 export default function BestsellerAdvert() {
     const {game, user} = useContext(Context)
@@ -21,13 +19,23 @@ export default function BestsellerAdvert() {
         // })
     }, [])
 
-    const getIndexOfBestseller = () => {
-        return game.games.findIndex((game) => game.title === 'Rue la résistance')
+    const getIdOfBestseller = () => {
+        const index = game.games.findIndex((game) => game.title === 'Rue la résistance')
+        if (index !== -1) {
+            return GAME_ROUTE + '/' + game.games[index].id
+        }
+        return 'not-found'
     }
-    console.log(getIndexOfBestseller())
-    const gameBestseller = game.games[getIndexOfBestseller()]
-    console.log(gameBestseller)
-    const id = 3
+    // console.log(getIndexOfBestseller())
+    // let index = -1
+    // let gameBestseller = ''
+    // if (getIndexOfBestseller() !== -1) {
+    //     index = getIndexOfBestseller()
+    //     gameBestseller = game.games[index]
+    // }
+    // //const
+    // console.log(gameBestseller)
+    // const id = 3
     return (<div className={'bestseller-advert-container'}>
         <div className={'bestseller-advert-content'}>
             <div className={'bestseller-advert-title'}>
@@ -47,21 +55,24 @@ export default function BestsellerAdvert() {
             </div>
 
             <div className={'bestseller-advert-buttons'}>
-                {containsInLibrary(user, id) &&
-                    <a href={game.download_link !== null ? game.download_link + 'e' : 'link'} target={'_'}>
-                        <Button content={'Download game'} size={'medium'} backgroundColor={'blue'}/>
-                    </a>}
-                {containsInCart(user, id) && <>
-                    <Button content={'Remove from cart'} backgroundColor={'blue'}
-                            action={() => ClickRemoveFromCart(user, id)}/>
-                    <Button content={'Open cart'} backgroundColor={'purple'}
-                            action={() => navigateToWithPreloader(CART_ROUTE)}/></>}
-                {!containsInCart(user, id) && !containsInLibrary(user, id) && <>
-                    <Button content={'Add to cart'} backgroundColor={'blue'}
-                            action={() => ClickAddToCart(user, game, setIsAuthFormVisible)}/>
-                    <Button content={'Buy now'} backgroundColor={'purple'}
-                            action={() => ClickAddToCart(user, game, setIsAuthFormVisible, () => navigateToWithPreloader(CART_ROUTE))}/></>}
-                {/*<Button content={'Add to cart'} backgroundColor={'blue'} action={() => clickAddToCart()}/>*/}
+                {/*{containsInLibrary(user, id) &&*/}
+                {/*    <a href={'https://drive.google.com/drive/folders/1Vr9vVRe1dR4l-BDKhW_Wauu16r-P3GHU'}*/}
+                {/*       target={'_blank'}>*/}
+                {/*        <Button content={'Download game'} size={'medium'} backgroundColor={'blue'}/>*/}
+                {/*    </a>}*/}
+                {/*{containsInCart(user, id) && <>*/}
+                {/*    <Button content={'Remove from cart'} backgroundColor={'blue'}*/}
+                {/*            action={() => ClickRemoveFromCart(user, id)}/>*/}
+                {/*    <Button content={'Open cart'} backgroundColor={'purple'}*/}
+                {/*            action={() => navigateToWithPreloader(CART_ROUTE)}/></>}*/}
+                {/*{!containsInCart(user, id) && !containsInLibrary(user, id) && <>*/}
+                {/*    <Button content={'Add to cart'} backgroundColor={'blue'}*/}
+                {/*            action={() => ClickAddToCart(user, gameBestseller, setIsAuthFormVisible, () => {*/}
+                {/*            })}/>*/}
+                {/*    <Button content={'Buy now'} backgroundColor={'purple'}*/}
+                {/*            action={() => ClickAddToCart(user, gameBestseller, setIsAuthFormVisible, () => navigateToWithPreloader(CART_ROUTE))}/></>}*/}
+                <Button content={'Learn more'} backgroundColor={'blue'} size={'medium'}
+                        action={() => navigateToWithPreloader(getIdOfBestseller())}/>
                 {/*<Button content={'Buy now'} backgroundColor={'purple'} action={() => clickBuyNow()}/>*/}
             </div>
         </div>

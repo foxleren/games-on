@@ -72,7 +72,7 @@ const ProductPage = observer(() => {
         </div>}
         <div className={'product-buttons'}>
             {containsInLibrary(user, id) &&
-                <a href={'https://drive.google.com/drive/folders/1Vr9vVRe1dR4l-BDKhW_Wauu16r-P3GHU'} target={'_'}>
+                <a href={'https://drive.google.com/drive/folders/1Vr9vVRe1dR4l-BDKhW_Wauu16r-P3GHU'} target={'_blank'}>
                     <Button content={'Download game'} size={'medium'} backgroundColor={'blue'}/>
                 </a>}
             {containsInCart(user, id) && <>
