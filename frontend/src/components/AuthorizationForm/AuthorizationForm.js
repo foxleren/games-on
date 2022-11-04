@@ -7,6 +7,8 @@ import {Context} from "../../index";
 import {observer} from "mobx-react-lite";
 import useAuthForm from "../../hooks/useAuthForm";
 import usePreloader from "../../hooks/usePreloader";
+import {getAllCartItems} from "../../http/cartAPI";
+import {getLibrary} from "../../http/libraryAPI";
 
 const AuthorizationForm = observer(() => {
     const {isAuthFormVisible, setIsAuthFormVisible, authType} = useAuthForm();
@@ -31,15 +33,31 @@ const AuthorizationForm = observer(() => {
             let data;
             if (isSelectedLoginForm) {
                 data = await signIn(formData.email, formData.password)
+                window.location.reload()
             } else {
                 await signUp(formData.email, formData.password).then((token) => {
                     createCart(token)
                     data = token
                 })
+                window.location.reload()
             }
+            // getAllCartItems().then(data => {
+            //     if (data === null) {
+            //         data = []
+            //     }
+            //     user.setCartItems(data)
+            //     //cart.setCartItems(data)
+            // })
+            // getLibrary().then(data => {
+            //     if (data === null) {
+            //         data = []
+            //     }
+            //     //console.log(data)
+            //     user.setLibrary(data)
+            // })
             user.setUser(data)
             user.setIsAuth(true)
-            showPreloader()
+            //showPreloader()
         } catch (err) {
             console.log(err)
         }

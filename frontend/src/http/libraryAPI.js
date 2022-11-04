@@ -2,7 +2,7 @@ import {$authHost} from "./index";
 
 export const getLibrary = async () => {
     const {data} = await $authHost.get('/api/user/library/')
-    console.log(data)
+    //console.log(data)
     return data
 }
 

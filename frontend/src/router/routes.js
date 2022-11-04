@@ -3,6 +3,7 @@ import {ACCOUNT_ROUTE, CART_ROUTE, GAME_ROUTE, HOME_ROUTE, NOTFOUND_ROUTE} from 
 import HomePage from "../pages/HomePage/HomePage";
 import ProductPage from "../pages/PorductPage/ProductPage";
 import NotFoundPage from "../pages/NotFoundPage/NotFoundPage";
+import AccountPage from "../pages/AccountPage/AccountPage";
 
 export const authRoutes = [
     {
@@ -11,7 +12,7 @@ export const authRoutes = [
     },
     {
         path: ACCOUNT_ROUTE,
-        Component: <CartPage/> // Здесь будет ЛК
+        Component: <AccountPage/>
     },
 ]
 

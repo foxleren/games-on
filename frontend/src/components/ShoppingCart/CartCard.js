@@ -1,17 +1,10 @@
 import './Cart';
-import {deleteCartItem, deleteItemCart} from "../../http/cartAPI";
 import {useContext} from "react";
 import {Context} from "../../index";
+import {removeFromCart} from "../../js/ApiStorageHandlers";
 
 export default function CartCard({product, currency}) {
-    const {cart} = useContext(Context)
-
-    const removeFromCart = async (id) => {
-        await deleteCartItem(id)
-        cart.setCartItems(cart.cartItems.filter((item) => {
-            return item.id !== id
-        }))
-    }
+    const {user} = useContext(Context)
 
     return (<div className={'cart-card-container'}>
         <div className={'cart-card-info'}>
@@ -23,7 +16,7 @@ export default function CartCard({product, currency}) {
         </div>
 
         <div className={'cart-card-right'}>
-            <div className={'remove-from-cart'} onClick={() => removeFromCart(product.id)}/>
+            <div className={'remove-from-cart'} onClick={() => removeFromCart(user, product.id)}/>
             <div className={'cart-card-price'}>{`${product.price.toFixed(1)} ${currency}`}</div>
         </div>
     </div>);

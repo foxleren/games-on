@@ -1,0 +1,112 @@
+.account-page {
+  max-width: 1500px;
+  margin: 0 auto;
+  padding: 70px 90px 0 90px;
+}
+
+.account-info-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.account-info-title {
+  margin-bottom: 80px;
+
+  font-weight: 900;
+  font-size: 30px;
+  line-height: 93.5%;
+
+  color: #FFFFFF;
+}
+
+.account-info-input {
+  background: #1E2734;
+  border-radius: 10px;
+  padding: 17px 27px;
+
+  font-weight: 300;
+  font-size: 20px;
+  line-height: 93.5%;
+
+  color: #98A9C1;
+  &:not(:last-child) {
+    margin-bottom: 24px;
+  }
+}
+
+.account-games-container {
+  display:flex;
+  flex-direction: column;
+
+  margin-top: 100px;
+}
+
+.account-games-title {
+  font-weight: 700;
+  font-size: 30px;
+  line-height: 93.5%;
+
+  color: #FFFFFF;
+
+  margin-bottom: 40px;
+}
+
+.account-games-items {
+  display: flex;
+  flex-direction: row;
+  flex-wrap:wrap;
+}
+
+.account-game-item {
+  width: fit-content;
+  min-width: 600px;
+  display: flex;
+  flex-direction: row;
+  //flex-wrap: wrap;
+  justify-content: space-between;
+
+  padding: 16px;
+
+  background: #1E2734;
+  border-radius: 10px;
+
+  &:not(:last-child) {
+    margin-right: 40px;
+  }
+  margin-bottom: 40px;
+
+  img  {
+    width: 184px;
+    height: 218px;
+  }
+}
+.account-game-item-left {
+  width: 230px;
+}
+.account-game-item-right {
+  max-width: 350px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.account-game-title {
+  font-weight: 700;
+  font-size: 25px;
+  line-height: 31px;
+
+  color: #FFFFFF;
+
+  margin-bottom: 16px;
+}
+
+.account-game-description {
+  font-weight: 300;
+  font-size: 20px;
+  line-height: 25px;
+
+  color: #98A9C1;
+
+  margin-bottom: 32px;
+}

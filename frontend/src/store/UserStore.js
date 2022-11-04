@@ -61,4 +61,12 @@ export default class UserStore {
     setCartTotalPrice(totalPrice) {
         this._CartTotalPrice = totalPrice
     }
+
+    setAllParamsClear() {
+        this._isAuth = false;
+        this._user = {}
+        this._library = []
+        this._cartItems = []
+        this._CartTotalPrice = 0
+    }
 }

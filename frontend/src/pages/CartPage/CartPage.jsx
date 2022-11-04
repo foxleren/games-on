@@ -4,7 +4,7 @@ import {observer} from "mobx-react-lite";
 import {useContext, useEffect} from "react";
 import {Context} from "../../index";
 import {deleteAllCartItems, getAllCartItems} from "../../http/cartAPI";
-import {addToLibrary} from "../../http/libraryAPI";
+import {addToLibrary, getLibrary} from "../../http/libraryAPI";
 import CartCard from "../../components/ShoppingCart/CartCard";
 import Button from "../../components/Button/Button";
 import usePreloader from "../../hooks/usePreloader";
@@ -13,20 +13,32 @@ const CartPage = observer(() => {
     const {user} = useContext(Context)
     const {showPreloader} = usePreloader()
     useEffect(() => {
-        // showPreloader()
-        // getAllCartItems().then(data => {
-        //     if (data == null) {
-        //         data = []
-        //     }
-        //     cart.setCartItems(data)
-        // })
+        // if (user.isAuth) {
+        //     getAllCartItems().then(data => {
+        //         if (data === null) {
+        //             data = []
+        //         }
+        //         user.setCartItems(data)
+        //         //cart.setCartItems(data)
+        //     })
+        //     getLibrary().then(data => {
+        //         if (data === null) {
+        //             data = []
+        //         }
+        //         //console.log(data)
+        //         user.setLibrary(data)
+        //     })
+        // }
     }, [])
+
+    console.log(user.cartItems)
 
     const completeOrder = async () => {
         await addToLibrary()
+        await clearCart()
     }
 
-    const clearCart = async() => {
+    const clearCart = async () => {
         await deleteAllCartItems()
         user.setCartItems([])
     }

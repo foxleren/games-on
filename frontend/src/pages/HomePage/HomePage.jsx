@@ -10,6 +10,8 @@ import {observer} from "mobx-react-lite";
 import usePreloader from "../../hooks/usePreloader";
 import {getAllCartItems} from "../../http/cartAPI";
 import {getLibrary} from "../../http/libraryAPI";
+import {useState} from "react";
+import useLocalStorage from "../../hooks/useLocalStorage";
 
 
 const HomePage = observer(() => {
@@ -20,19 +22,20 @@ const HomePage = observer(() => {
         getAllGames().then(data => {
             game.setGames(data)
         })
-        getAllCartItems().then(data => {
-            if (data === null) {
-                data = []
-            }
-            user.setCartItems(data)
-            //cart.setCartItems(data)
-        })
-        getLibrary().then(data => {
-            if (data === null) {
-                data = []
-            }
-            user.setLibrary(data)
-        })
+        // getAllCartItems().then(data => {
+        //     if (data === null) {
+        //         data = []
+        //     }
+        //     user.setCartItems(data)
+        //     //cart.setCartItems(data)
+        // })
+        // getLibrary().then(data => {
+        //     if (data === null) {
+        //         data = []
+        //     }
+        //     //console.log(data)
+        //     user.setLibrary(data)
+        // })
     }, [])
 
     return (
