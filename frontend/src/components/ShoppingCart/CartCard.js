@@ -24,7 +24,7 @@ export default function CartCard({product, currency}) {
 
         <div className={'cart-card-right'}>
             <div className={'remove-from-cart'} onClick={() => removeFromCart(product.id)}/>
-            <div className={'cart-card-price'}>{`${product.price} ${currency}`}</div>
+            <div className={'cart-card-price'}>{`${product.price.toFixed(1)} ${currency}`}</div>
         </div>
     </div>);
 }

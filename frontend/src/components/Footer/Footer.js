@@ -16,7 +16,7 @@ export default function Footer({page}) {
     return (
         <footer>
             <div className={'footer-container'}>
-                <div className={`footer-background ${!isBackgroundFull() ? 'short' : ''}`}/>
+                <div className={`footer-background short`}/>
                 <div className={'footer-left'}>
                     <div className={'footer-left-column'}>
                         <div className={'footer-left-column-item'}>

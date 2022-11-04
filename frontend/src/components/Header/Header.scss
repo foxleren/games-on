@@ -17,11 +17,13 @@ header {
   height: 40px;
 
   margin-right: 90px;
+  cursor: pointer;
 }
 
 .header-menu {
   display: flex;
   align-items: center;
+  cursor: pointer;
 }
 
 .header-menu-item, .header-menu>a {

@@ -22,8 +22,9 @@
   border-radius: 10px;
   width: 307px;
   height: 490px;
+  padding: 16px;
 
-  margin-right: 43px;
+  margin-right: 16px;
   margin-bottom: 34px;
 
   background-color: #1E2734;
@@ -58,6 +59,11 @@
   margin-bottom: 15px;
 }
 
+.showcase-card-bottom-more-price {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
 .showcase-card-more {
   font-weight: 400;
   font-size: 15px;
@@ -65,4 +71,11 @@
   text-decoration-line: underline;
   color: #FFFFFF;
   cursor: pointer;
+}
+
+.showcase-card-price {
+  font-weight: 800;
+  font-size: 24px;
+  line-height: 30px;
+  color: #468DDE;
 }

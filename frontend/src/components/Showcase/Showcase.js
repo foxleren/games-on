@@ -18,7 +18,7 @@ const Showcase = observer(() => {
         <div className={'showcase-items'}>
             {game.games != null && game.games.map((item, index) => {
                 return <ShowcaseCard key={index} id={item.id} name={item.title} description={item.description}
-                                     image={getPreview(item.images)}/>
+                                     image={getPreview(item.images)} price={item.price}/>
             })}
         </div>
     </div>);

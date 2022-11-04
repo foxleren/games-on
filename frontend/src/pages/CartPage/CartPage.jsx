@@ -7,16 +7,19 @@ import {deleteAllCartItems, getAllCartItems} from "../../http/cartAPI";
 import {addToLibrary} from "../../http/libraryAPI";
 import CartCard from "../../components/ShoppingCart/CartCard";
 import Button from "../../components/Button/Button";
+import usePreloader from "../../hooks/usePreloader";
 
 const CartPage = observer(() => {
     const {cart} = useContext(Context)
+    const {showPreloader} = usePreloader()
     useEffect(() => {
-        getAllCartItems().then(data => {
-            if (data == null) {
-                data = []
-            }
-            cart.setCartItems(data)
-        })
+        // showPreloader()
+        // getAllCartItems().then(data => {
+        //     if (data == null) {
+        //         data = []
+        //     }
+        //     cart.setCartItems(data)
+        // })
     }, [])
 
     const completeOrder = async () => {
@@ -53,7 +56,7 @@ const CartPage = observer(() => {
                         Items: <span>{cart.cartItems.length}</span>
                     </div>
                     <div className={'cart-schild-total-cost'}>
-                        Total cost: <span>{`${countTotalCost(cart.cartItems)} ${currency}`}</span>
+                        Total cost: <span>{`${countTotalCost(cart.cartItems).toFixed(1)} ${currency}`}</span>
                     </div>
                 </div>
                 <div className={'cart-buttons'}>

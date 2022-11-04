@@ -5,13 +5,20 @@ import React from "react";
 import AuthFormProvider from "./providers/AuthFormProvider";
 import AuthorizationForm from "./components/AuthorizationForm/AuthorizationForm";
 import Header from "./components/Header/Header";
+import PreloaderProvider from "./providers/PreloaderProvider";
+import Preloader from "./components/Preloader/Preloader";
 
 export default function App() {
     return (
         <BrowserRouter>
-                <AuthorizationForm/>
-                <Header/>
-                <AppRouter/>
+            <PreloaderProvider>
+                <AuthFormProvider>
+                    <Preloader/>
+                    <AuthorizationForm/>
+                    <Header/>
+                    <AppRouter/>
+                </AuthFormProvider>
+            </PreloaderProvider>
         </BrowserRouter>
         // <div className="App">
         //     <AuthFormProvider><AuthorizationForm/>

@@ -4,6 +4,7 @@
   position: relative;
   padding-bottom: 750px;
   overflow: hidden;
+  justify-content: space-between;
 }
 
 .bestseller-advert-content {
@@ -43,9 +44,11 @@
 }
 
 .bestseller-advert-background {
-  background-image: url(../../../public/images/bestseller_advert/image.svg);
-  width: 893px;
-  height: 1032px;
+  background: url(../../../public/images/bestseller_advert/image.svg) no-repeat;
+  width: 607px;
+  height: 607px;
   position: absolute;
   right: 0;
+  top: 50%;
+  transform: translateY(-50%);
 }

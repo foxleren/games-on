@@ -16,7 +16,6 @@ root.render(
             user: new UserStore(),
             game: new GameStore(),
             authForm: new AuthFormStore(),
-            cart: new CartStore(),
         }}>
             <App/>
         </Context.Provider>
