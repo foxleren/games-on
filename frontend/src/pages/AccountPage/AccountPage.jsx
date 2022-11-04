@@ -6,6 +6,7 @@ import {getUserData} from "../../http/userAPI";
 import Button from "../../components/Button/Button";
 import {GAME_ROUTE} from "../../utils/consts";
 import usePreloader from "../../hooks/usePreloader";
+import {getLibrary} from "../../http/libraryAPI";
 
 const AccountPage = observer(() => {
     const {user} = useContext(Context)
@@ -16,7 +17,16 @@ const AccountPage = observer(() => {
         showPreloader()
         getUserData().then(data => {
             setUserEmail(data.email)
-        }).then(() => {
+        }).catch(err => {
+            console.log(err)
+        })
+        getLibrary().then(data => {
+            if (data === null) {
+                data = []
+            }
+            user.setLibrary(data)
+        }).catch(err => {
+            console.log("Error while getting data", err)
         })
     }, [])
     return (<div className={'account-page'}>
@@ -37,7 +47,7 @@ const AccountPage = observer(() => {
             </div>
             <div className={'account-games-items'}>
                 {user.library !== null && user.library.map((item, index) => {
-                    return (<div className={'account-game-item'}>
+                    return (<div className={'account-game-item'} key={index}>
                         <div className={'account-game-item-left'}>
                             <img className={'showcase-card-image'} src={item.images[0]} alt={''}/>
                         </div>

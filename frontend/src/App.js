@@ -10,28 +10,38 @@ import Preloader from "./components/Preloader/Preloader";
 import {Context} from "./index";
 import {getAllCartItems} from "./http/cartAPI";
 import {getLibrary} from "./http/libraryAPI";
+import {getAllGames} from "./http/gameAPI";
 
 export default function App() {
-    const {user} = useContext(Context)
+    const {user, game} = useContext(Context)
     useEffect(() => {
-        getAllCartItems().then(data => {
-            if (data === null) {
-                data = []
-            }
-            user.setCartItems(data)
-            //cart.setCartItems(data)
+        getAllGames().then(data => {
+            game.setGames(data)
+        }).catch(err => {
+            console.log("Error while getting data", err)
         })
-        getLibrary().then(data => {
-            if (data === null) {
-                data = []
-            }
-            //console.log(data)
-            user.setLibrary(data)
-        })
+        if (user.isAuth) {
+            getAllCartItems().then(data => {
+                if (data === null) {
+                    data = []
+                }
+                user.setCartItems(data)
+            }).catch(err => {
+                console.log("Error while getting data", err)
+            })
+            getLibrary().then(data => {
+                if (data === null) {
+                    data = []
+                }
+                user.setLibrary(data)
+            }).catch(err => {
+                console.log("Error while getting data", err)
+            })
+        }
     }, [user.isAuth])
 
     const token = localStorage.getItem('token')
-    console.log(token)
+    // console.log(token)
     if (token != null) {
         user.setIsAuth(true)
     }

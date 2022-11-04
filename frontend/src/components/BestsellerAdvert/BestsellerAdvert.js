@@ -1,40 +1,33 @@
 import './BestsellerAdvert.scss';
 import Button from "../Button/Button";
-import {addToCart} from "../../http/cartAPI";
 import {CART_ROUTE} from "../../utils/consts";
-import {useContext} from "react";
+import React, {useContext, useEffect} from "react";
 import {Context} from "../../index";
 import useAuthForm from "../../hooks/useAuthForm";
 import usePreloader from "../../hooks/usePreloader";
+import {ClickAddToCart, ClickRemoveFromCart, containsInCart, containsInLibrary} from "../../js/ApiStorageHandlers";
+import {getAllGames} from "../../http/gameAPI";
 
 export default function BestsellerAdvert() {
     const {game, user} = useContext(Context)
     const {setIsAuthFormVisible} = useAuthForm()
     const {navigateToWithPreloader} = usePreloader()
-    const addGameToCart = async () => {
-        const indexOfBestseller = game.games.findIndex((game) => game.title === 'Rue la résistance')
-        await addToCart(game.games[indexOfBestseller].id)
-        user.addCartItem(game.games[indexOfBestseller])
+
+    useEffect(() => {
+        // getAllGames().then(data => {
+        //     game.setGames(data)
+        // }).catch(err => {
+        //     console.log("Error while getting data", err)
+        // })
+    }, [])
+
+    const getIndexOfBestseller = () => {
+        return game.games.findIndex((game) => game.title === 'Rue la résistance')
     }
-
-    const clickAddToCart = async () => {
-        if (user.isAuth) {
-            await addGameToCart()
-        } else {
-            setIsAuthFormVisible(true)
-        }
-    }
-
-
-    const clickBuyNow = async () => {
-        if (user.isAuth) {
-            await addGameToCart()
-            navigateToWithPreloader(CART_ROUTE)
-        } else {
-            setIsAuthFormVisible(true)
-        }
-    }
-
+    console.log(getIndexOfBestseller())
+    const gameBestseller = game.games[getIndexOfBestseller()]
+    console.log(gameBestseller)
+    const id = 3
     return (<div className={'bestseller-advert-container'}>
         <div className={'bestseller-advert-content'}>
             <div className={'bestseller-advert-title'}>
@@ -54,8 +47,22 @@ export default function BestsellerAdvert() {
             </div>
 
             <div className={'bestseller-advert-buttons'}>
-                <Button content={'Add to cart'} backgroundColor={'blue'} action={() => clickAddToCart()}/>
-                <Button content={'Buy now'} backgroundColor={'purple'} action={() => clickBuyNow()}/>
+                {containsInLibrary(user, id) &&
+                    <a href={game.download_link !== null ? game.download_link + 'e' : 'link'} target={'_'}>
+                        <Button content={'Download game'} size={'medium'} backgroundColor={'blue'}/>
+                    </a>}
+                {containsInCart(user, id) && <>
+                    <Button content={'Remove from cart'} backgroundColor={'blue'}
+                            action={() => ClickRemoveFromCart(user, id)}/>
+                    <Button content={'Open cart'} backgroundColor={'purple'}
+                            action={() => navigateToWithPreloader(CART_ROUTE)}/></>}
+                {!containsInCart(user, id) && !containsInLibrary(user, id) && <>
+                    <Button content={'Add to cart'} backgroundColor={'blue'}
+                            action={() => ClickAddToCart(user, game, setIsAuthFormVisible)}/>
+                    <Button content={'Buy now'} backgroundColor={'purple'}
+                            action={() => ClickAddToCart(user, game, setIsAuthFormVisible, () => navigateToWithPreloader(CART_ROUTE))}/></>}
+                {/*<Button content={'Add to cart'} backgroundColor={'blue'} action={() => clickAddToCart()}/>*/}
+                {/*<Button content={'Buy now'} backgroundColor={'purple'} action={() => clickBuyNow()}/>*/}
             </div>
         </div>
         <div className={'bestseller-advert-background'}/>

@@ -4,6 +4,7 @@ export default class UserStore {
     constructor() {
         this._isAuth = false;
         this._user = {}
+        this._email = ''
         this._library = []
         this._cartItems = []
         this._CartTotalPrice = 0
@@ -31,11 +32,19 @@ export default class UserStore {
         return this._cartItems.length === 0;
     }
 
-    setLibrary(library) {
-        this._library = library
+    get cartItems() {
+        return this._cartItems
     }
 
     //---------------
+
+    get userEmail() {
+        return this._email
+    }
+
+    setLibrary(library) {
+        this._library = library
+    }
 
     //-----------
     setIsAuth(authStatus) {
@@ -54,10 +63,6 @@ export default class UserStore {
         this._cartItems = cartItems
     }
 
-    get cartItems() {
-        return this._cartItems
-    }
-
     setCartTotalPrice(totalPrice) {
         this._CartTotalPrice = totalPrice
     }
@@ -68,5 +73,9 @@ export default class UserStore {
         this._library = []
         this._cartItems = []
         this._CartTotalPrice = 0
+    }
+
+    setUserEmail(email) {
+        this._email = email
     }
 }

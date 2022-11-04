@@ -10,32 +10,42 @@ import {observer} from "mobx-react-lite";
 import usePreloader from "../../hooks/usePreloader";
 import {getAllCartItems} from "../../http/cartAPI";
 import {getLibrary} from "../../http/libraryAPI";
-import {useState} from "react";
-import useLocalStorage from "../../hooks/useLocalStorage";
+import {getUserData} from "../../http/userAPI";
 
 
 const HomePage = observer(() => {
-    const {user, game, cart, library} = useContext(Context)
+    const {user, game} = useContext(Context)
     const {showPreloader} = usePreloader()
     useEffect(() => {
         showPreloader()
-        getAllGames().then(data => {
-            game.setGames(data)
-        })
-        // getAllCartItems().then(data => {
-        //     if (data === null) {
-        //         data = []
+        //console.log(user.isAuth)
+        // try {
+        //     getAllGames().then(data => {
+        //         game.setGames(data)
+        //     }).then()
+        //     if (user.isAuth) {
+        //         getAllCartItems().then(data => {
+        //             if (data === null) {
+        //                 data = []
+        //             }
+        //             user.setCartItems(data)
+        //             //cart.setCartItems(data)
+        //         })
+        //         getLibrary().then(data => {
+        //             if (data === null) {
+        //                 data = []
+        //             }
+        //             //console.log(data)
+        //             user.setLibrary(data)
+        //         })
+        //         getUserData().then(data => {
+        //             user.setUserEmail(data.email)
+        //         })
         //     }
-        //     user.setCartItems(data)
-        //     //cart.setCartItems(data)
-        // })
-        // getLibrary().then(data => {
-        //     if (data === null) {
-        //         data = []
-        //     }
-        //     //console.log(data)
-        //     user.setLibrary(data)
-        // })
+        // } catch (err) {
+        //     console.log("Error while downloading data")
+        // }
+
     }, [])
 
     return (
