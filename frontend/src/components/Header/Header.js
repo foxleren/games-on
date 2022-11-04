@@ -33,7 +33,10 @@ const Header = observer(() => {
             </div>
             <div className={'header-right'}>
                 <div className={`header-cart ${user.isAuth && !user.isCartEmpty ? 'full' : 'empty'}`}
-                     onClick={() => clickCart()}/>
+                     onClick={() => clickCart()}>
+                    <div
+                        className={`header-cart-counter ${user.cartItems.length > 0 ? 'visible' : 'hidden'}`}>{user.cartItems.length}</div>
+                </div>
                 {!user.isAuth ? <Button backgroundColor={'blue'} content={'Log in / Register'}
                                         action={() => setIsAuthFormVisible(true)}/> :
                     <Button backgroundColor={'blue'} content={'Log out'}

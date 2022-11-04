@@ -26,7 +26,7 @@ header {
   cursor: pointer;
 }
 
-.header-menu-item, .header-menu>a {
+.header-menu-item, .header-menu > a {
   font-weight: 300;
   font-size: 17px;
   line-height: 93.5%;
@@ -43,7 +43,8 @@ header {
 }
 
 .header-cart {
-  background-image: url(../../../public/images/blue_cart.svg);
+  position: relative;
+ // background-image: url(../../../public/images/blue_cart.svg);
   width: 29px;
   height: 29px;
   margin-right: 40px;
@@ -51,8 +52,36 @@ header {
   cursor: pointer;
 
   transition: all 0.3s ease-in-out;
-
+  background-image: url(../../../public/images/cart.svg);
   &.empty {
-    background-image: url(../../../public/images/cart.svg);
+
+  }
+
+  & > span {
+    font-size: 30px;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+  }
+}
+
+.header-cart-counter {
+  width: 16px;
+  height: 16px;
+  background: #468DDE;
+  border-radius: 100px;
+  position: absolute;
+  right: -10px;
+  top: -5px;
+  text-align: center;
+
+  font-family: "Inter", sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 16px;
+
+  &.hidden {
+    display: none;
   }
 }
