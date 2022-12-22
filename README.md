@@ -6,6 +6,13 @@
 
 Platform for selling indie games.
 
+![image](https://user-images.githubusercontent.com/64990498/209164127-40a7e810-0b54-47ea-b4a2-721092d87492.png)
+
+![image](https://user-images.githubusercontent.com/64990498/209163301-fbb265a0-bc1b-44eb-bb41-2b9e7d333fcc.png)
+
+![image](https://user-images.githubusercontent.com/64990498/209163587-f5426e9f-b6f9-4996-9703-d16c26f6dd89.png)
+
+
 # Run
 
 To run application you need:
